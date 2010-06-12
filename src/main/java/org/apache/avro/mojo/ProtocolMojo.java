@@ -18,7 +18,7 @@
 
 package org.apache.avro.mojo;
 
-import org.apache.avro.specific.SpecificCompiler;
+import avrocompiler.TemplatedSpecificCompiler;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
@@ -73,6 +73,12 @@ public class ProtocolMojo extends AbstractMojo {
     private MavenProject project;
 
     /**
+     * Template subdirectory
+     * @parameter
+     */
+    private String templateSubdir;
+
+    /**
      * @parameter default-value=".avpr"
      */
     private String protocolExtension;
@@ -106,11 +112,13 @@ public class ProtocolMojo extends AbstractMojo {
         for (String filename : includedFiles) {
             try {
                 if (filename.endsWith(schemaExtension)) {
-                    SpecificCompiler.compileSchema(
+                    TemplatedSpecificCompiler.compileSchema(
+                            templateSubdir,
                             new File(sourceDirectory, filename),
                             outputDirectory);
                 } else if (filename.endsWith(protocolExtension)) {
-                    SpecificCompiler.compileProtocol(
+                    TemplatedSpecificCompiler.compileProtocol(
+                            templateSubdir,
                             new File(sourceDirectory, filename),
                             outputDirectory);
                 } else {
