@@ -39,15 +39,6 @@ under the License.
         </license>
     </licenses>
 
-    <prerequisites>
-        <maven>2.0.6</maven>
-    </prerequisites>
-
-    <issueManagement>
-        <system>JIRA</system>
-        <url>https://issues.apache.org/jira/browse/AVRO</url>
-    </issueManagement>
-
     <repositories>
         <repository>
             <id>javarants releases</id>
